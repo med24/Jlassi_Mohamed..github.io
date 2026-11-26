@@ -1,0 +1,760 @@
+Save this complete file as `index.html`. Replace `jlassi.mohamed@example.com` (in three places: the contact link, the `YOUR_EMAIL` constant, and the hero/social links if needed) and `your-username` with your actual email and GitHub handle.
+
+```html
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Jlassi Mohamed — Software Engineer Portfolio: Distributed Systems, Backend Architecture, and Simulation" />
+  <title>Jlassi Mohamed — Software Engineer</title>
+  <style>
+    /* =========================================
+       1. CSS Variables & Theme Tokens
+       ========================================= */
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-secondary: #111827;
+      --bg-card: #161f33;
+      --bg-card-hover: #1e2942;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --accent-subtle: rgba(56, 189, 248, 0.12);
+      --border: #1e293b;
+      --shadow: 0 10px 30px -10px rgba(2, 6, 23, 0.7);
+      --radius: 10px;
+      --max-width: 1040px;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --accent: #0284c7;
+      --accent-hover: #0369a1;
+      --accent-subtle: rgba(2, 132, 199, 0.1);
+      --border: #e2e8f0;
+      --shadow: 0 10px 25px -10px rgba(15, 23, 42, 0.1);
+    }
+
+    /* =========================================
+       2. Reset & Base Styles
+       ========================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.65;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    h2 {
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    /* =========================================
+       3. Navigation
+       ========================================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    [data-theme="light"] header {
+      background-color: rgba(248, 250, 252, 0.85);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 4.25rem;
+    }
+
+    .logo {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .theme-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+
+    .theme-btn:hover {
+      border-color: var(--accent);
+    }
+
+    /* =========================================
+       4. Hero Section
+       ========================================= */
+    .hero {
+      padding: 6.5rem 0 5.5rem;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.75rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--text-secondary);
+      max-width: 640px;
+      margin-bottom: 2.25rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.4rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: #0b0f19;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+      color: #0b0f19;
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    /* =========================================
+       5. Projects Grid & Cards
+       ========================================= */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      background-color: var(--bg-card-hover);
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .project-type {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      background: var(--accent-subtle);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.9rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .project-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.65rem;
+      color: var(--text-primary);
+    }
+
+    .project-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style: none;
+      margin-top: auto;
+    }
+
+    .tech-stack li {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+    }
+
+    /* =========================================
+       6. Skills & About Layout
+       ========================================= */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text-secondary);
+      margin-bottom: 1.1rem;
+    }
+
+    .skills-box {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .skill-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .skill-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .skill-group h4 {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style: none;
+    }
+
+    .skill-list li {
+      font-size: 0.85rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 5px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    /* =========================================
+       7. Contact Section
+       ========================================= */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .contact-info p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-methods {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .contact-methods li {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .contact-form {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      border: none;
+      cursor: pointer;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .form-status {
+      font-size: 0.88rem;
+      color: var(--accent);
+      display: none;
+    }
+
+    /* =========================================
+       8. Footer & Responsive Rules
+       ========================================= */
+    footer {
+      padding: 2.25rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .about-grid,
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .nav-links .hide-mobile {
+        display: none;
+      }
+
+      section {
+        padding: 3.75rem 0;
+      }
+
+      .hero {
+        padding: 4.5rem 0 3.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container nav-inner">
+      <a href="#" class="logo">&lt;<span>JlassiMohamed</span> /&gt;</a>
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="#projects">Projects</a></li>
+          <li class="hide-mobile"><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li>
+            <button id="theme-toggle" class="theme-btn" aria-label="Toggle color theme">
+              Light Mode
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <p class="hero-eyebrow">Hi, my name is</p>
+        <h1>Jlassi Mohamed.<br />I engineer resilient software systems.</h1>
+        <p class="hero-subtitle">
+          Software developer focused on distributed backends, low-level systems architecture, and computational simulation. I build clean, reliable tools from first principles.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">GitHub Profile</a>
+          <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Selected Work</span>
+          <h2>Featured Projects</h2>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project Card 1 -->
+          <article class="project-card">
+            <div>
+              <div class="project-top">
+                <span class="project-type">Distributed Systems</span>
+                <div class="project-links">
+                  <a href="https://github.com/your-username/project-one" target="_blank" rel="noopener noreferrer">Code</a>
+                  <a href="https://demo.example.com" target="_blank" rel="noopener noreferrer">Live</a>
+                </div>
+              </div>
+              <h3>TransitPulse Fleet Engine</h3>
+              <p>
+                Real-time mobile ticketing and GPS telemetry ingestion pipeline designed for low-bandwidth commuter networks without dedicated vehicle hardware.
+              </p>
+            </div>
+            <ul class="tech-stack">
+              <li>Java 21</li>
+              <li>Spring Boot</li>
+              <li>PostgreSQL</li>
+              <li>Redis</li>
+            </ul>
+          </article>
+
+          <!-- Project Card 2 -->
+          <article class="project-card">
+            <div>
+              <div class="project-top">
+                <span class="project-type">Simulation</span>
+                <div class="project-links">
+                  <a href="https://github.com/your-username/project-two" target="_blank" rel="noopener noreferrer">Code</a>
+                </div>
+              </div>
+              <h3>ThermoFluid 2D Solver</h3>
+              <p>
+                Computational fluid dynamics and enthalpy phase-change simulation engine written from scratch with multi-panel visual telemetry exports.
+              </p>
+            </div>
+            <ul class="tech-stack">
+              <li>Python</li>
+              <li>NumPy</li>
+              <li>C++</li>
+              <li>Matplotlib</li>
+            </ul>
+          </article>
+
+          <!-- Project Card 3 -->
+          <article class="project-card">
+            <div>
+              <div class="project-top">
+                <span class="project-type">Systems / VM</span>
+                <div class="project-links">
+                  <a href="https://github.com/your-username/project-three" target="_blank" rel="noopener noreferrer">Code</a>
+                </div>
+              </div>
+              <h3>ByteForge Virtual Machine</h3>
+              <p>
+                Custom stack-and-register bytecode virtual machine featuring instruction-level execution encryption and deterministic memory sandboxing.
+              </p>
+            </div>
+            <ul class="tech-stack">
+              <li>C</li>
+              <li>x86_64</li>
+              <li>CMake</li>
+              <li>Linux</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About & Skills Section -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Background</span>
+          <h2>About & Technical Stack</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              I am a Computer Science and Software Engineering student interested in understanding how systems work beneath high-level abstractions—from custom virtual machines and network packet filtering to numerical physics solvers.
+            </p>
+            <p>
+              When designing production software, I focus on predictable performance, strict data modeling, and pragmatic architecture that works under real-world hardware and network constraints.
+            </p>
+          </div>
+
+          <div class="skills-box">
+            <div class="skill-group">
+              <h4>Languages</h4>
+              <ul class="skill-list">
+                <li>Java 17+</li>
+                <li>Python</li>
+                <li>C / C++</li>
+                <li>SQL</li>
+                <li>Bash</li>
+              </ul>
+            </div>
+            <div class="skill-group">
+              <h4>Backend & Infrastructure</h4>
+              <ul class="skill-list">
+                <li>Spring Boot</li>
+                <li>REST / SOAP</li>
+                <li>Linux / iptables</li>
+                <li>Docker</li>
+                <li>Git</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Connect</span>
+          <h2>Get in Touch</h2>
+        </div>
+
+        <div class="contact-wrapper">
+          <div class="contact-info">
+            <p>
+              Interested in collaborating on systems engineering, backend architecture, or open-source tools? Send an email directly or compose a message using the form.
+            </p>
+            <ul class="contact-methods">
+              <li>Email: <a href="mailto:jlassi.mohamed@example.com">jlassi.mohamed@example.com</a></li>
+              <li>GitHub: <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer">github.com/your-username</a></li>
+              <li>LinkedIn: <a href="https://linkedin.com/in/your-username" target="_blank" rel="noopener noreferrer">linkedin.com/in/your-username</a></li>
+            </ul>
+          </div>
+
+          <form class="contact-form" id="contact-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Write your message..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary submit-btn">Open in Email Client</button>
+            <p class="form-status" id="form-status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; <span id="year"></span> Jlassi Mohamed. Built with semantic HTML &amp; CSS.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Dark / Light mode toggle with localStorage persistence
+    const themeToggle = document.getElementById("theme-toggle");
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem("theme") || "dark";
+    root.setAttribute("data-theme", savedTheme);
+    themeToggle.textContent = savedTheme === "dark" ? "Light Mode" : "Dark Mode";
+
+    themeToggle.addEventListener("click", () => {
+      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      localStorage.setItem("theme", next);
+      themeToggle.textContent = next === "dark" ? "Light Mode" : "Dark Mode";
+    });
+
+    // Simple mailto: submission without external endpoints
+    const YOUR_EMAIL = "jlassi.mohamed@example.com";
+    const contactForm = document.getElementById("contact-form");
+    const formStatus = document.getElementById("form-status");
+
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const senderEmail = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${senderEmail}\n\n${message}`);
+
+      window.location.href = `mailto:${YOUR_EMAIL}?subject=${subject}&body=${body}`;
+      formStatus.style.display = "block";
+      formStatus.textContent = "Opening your default email app with the message pre-filled.";
+    });
+  </script>
+</body>
+</html>
+
+```
